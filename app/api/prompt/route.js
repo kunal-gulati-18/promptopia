@@ -18,19 +18,19 @@ export async function GET(request) {
 			matchStage.creator = new ObjectId(user);
 		}
 		// Add text filter only if text exists and is not empty
-		if (text && text !== '' && text.trim()) {
-			// matchStage.prompt = { $regex: text, $options: 'i' };
-			matchStage.$or = [
-				{ prompt: { $regex: text, $options: 'i' } },
-				{ tags: { $regex: text, $options: 'i' } },
-			];
-		}
+		// if (text && text !== '' && text.trim()) {
+		// 	// matchStage.prompt = { $regex: text, $options: 'i' };
+		// 	matchStage.$or = [
+		// 		{ prompt: { $regex: text, $options: 'i' } },
+		// 		{ tags: { $regex: text, $options: 'i' } },
+		// 	];
+		// }
 
 		try {
 			const prompts = await Prompt.aggregate([
-				// {
-				// 	$match: matchStage,
-				// },
+				{
+					$match: matchStage,
+				},
 				{
 					$lookup: {
 						from: 'users', // The name of the users collection
