@@ -83,7 +83,13 @@ export const PromptCard = ({
 
 			{(enableEdit || enableDelete) && session?.user?.id === data.user._id ? (
 				<div className="cta d-flex gap-2">
-					<p className="blue_gradient cursor-pointer" onClick={handleEdit}>
+					<p
+						className="blue_gradient cursor-pointer"
+						onClick={(e) => {
+							e.stopPropagation();
+							handleEdit();
+						}}
+					>
 						Edit
 					</p>
 					<p className="orange_gradient cursor-pointer" onClick={handleDelete}>
